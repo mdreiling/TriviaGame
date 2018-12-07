@@ -1,4 +1,5 @@
 // Variables
+// ========================================================
 
 // Variables for Score.
 var score = 0;
@@ -13,8 +14,8 @@ var intervalID;
 
 // Trivia questions array.
 var triviaQuestions = [
-    { q: "What is the capital of Italy?", a: "Rome", b: "Madrid", c: "London", d: "Paris"},
-    { q: "Which European country also has direct control of land on mainland South America?", a: "France", b: "Spain", c: "Portugal", d: "United Kingdom"}
+    { q: "What is the capital of Italy?", answers: [{a: "Rome", c: "correct"}, {a: "Madrid", c: "incorrect"}, {a: "London", c: "incorrect"}, {a: "Paris", c: "incorrect"}]},
+    { q: "Which European country also has direct control of land on mainland South America?", answers: [{a: "Spain", c: "incorrect"}, {a: "Portugal", c: "incorrect"}, {a: "France", c: "correct"}, {a: "Netherlands", c: "incorrect"}]}
 ];
 
 // Variables for advancing question selector.
@@ -26,7 +27,9 @@ var answerIndex = [];
 var gameRunning = false;
 var questionPage = false;
 
+
 // Functions
+// ==========================================================
 
 // Game Reset Function for initial game start and for resetting the game with the restart button.
 function gameReset() {
@@ -46,15 +49,22 @@ function gameReset() {
 function questionSelector() {
     
     // Selecting questions and writing them into question field
+    $(".answerOptions").empty();
     questionIndex = triviaQuestions[triviaIndex].q;
     console.log("Current Question: " + questionIndex);
     $("#question-text").html(questionIndex);
 
     // Selecting corresponding answers and writing them into answer fields.
-    answerIndex = [triviaQuestions[triviaIndex].a, triviaQuestions[triviaIndex].b, triviaQuestions[triviaIndex].c, triviaQuestions[triviaIndex].d];
-    console.log("Current Answers: " + answerIndex);
+    answerIndex = [triviaQuestions[triviaIndex].answers[0].a, triviaQuestions[triviaIndex].answers[1].a, triviaQuestions[triviaIndex].answers[2].a, triviaQuestions[triviaIndex].answers[3].a];
+    answerCheck = [triviaQuestions[triviaIndex].answers[0].c, triviaQuestions[triviaIndex].answers[1].c, triviaQuestions[triviaIndex].answers[2].c, triviaQuestions[triviaIndex].answers[3].c];
+    console.log("Current Options: " + answerIndex);
     for (i = 0; i < 4; i++) {
-        $("#answerOptions-text").append(answerIndex[i] + "<br>");
+        // $(".answerOptions-text").append(answerIndex[i] + "<br>");
+        var answerButton = $("<button>");
+        answerButton.addClass("answerButton");
+        answerButton.attr("answer-value", answerCheck[i]);
+        answerButton.text(answerIndex[i]);
+        $(".answerOptions").append(answerButton);
     }
 
 }
@@ -74,7 +84,7 @@ function questionSelector() {
 function countdownTimer() {
     timeLeft--;
     $("#timer-text").text(timeLeft);
-    console.log(timeLeft)
+    // console.log(timeLeft)
     if (timeLeft === 0) {
         gameChangePage();
     }
@@ -101,7 +111,7 @@ function gameChangePage() {
 // Function to change to question page
 function toQuestionPage() {
     questionSelector();
-    timeLeft = 5;
+    timeLeft = 30;
     // pageTime();
     // countdownTimer();
     clearInterval(intervalID);
@@ -117,10 +127,32 @@ function toAnswerPage() {
     intervalID = setInterval (countdownTimer, 1000);
 }
 
+
 // Game Processes
+// ==========================================================
 
 // Document Ready Function to run on page load.
 $(document).ready(function(){
+
+    $(document).on("click", ".answerButton", function() {
+        // console.log($(this).attr("answer-value"));
+        var answerGiven = ($(this).attr("answer-value"));
+        console.log(answerGiven);
+
+        if (answerGiven === "correct") {
+            correctAnswers++;
+            console.log("Correct Answers " + correctAnswers);
+            toAnswerPage();
+            questionPage = false;
+        } 
+        
+        else {
+            incorrectAnswers++;
+            console.log("Incorrect Answers " + incorrectAnswers);
+            toAnswerPage();
+            questionPage = false;
+        }
+    })
 
     gameReset();
     // questionSelector();
