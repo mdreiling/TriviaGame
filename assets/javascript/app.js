@@ -46,7 +46,6 @@ var questionPage = false;
 // Start game function.
 $("#startButton").on("click", function() {
     gameReset();
-    toQuestionPage();
 })
 
 // Game Reset Function for initial game start and for resetting the game with the restart button.
@@ -61,6 +60,7 @@ function gameReset() {
     answerIndex = [];
     gameRunning = true;
     questionPage = true;
+    toQuestionPage();
 };
 
 // Question selector to run on loading of the question page.
@@ -117,20 +117,19 @@ function countdownTimer() {
 
 // Change Page Function 
 function gameChangePage() {
-    if (questionPage === false) {
-        toQuestionPage();
-        questionPage = true;
-        // console.log(questionPage);
-    } 
     
-    else if (questionCount === 10) {
+    if (questionCount === 10) {
         toEndPage();
     }
     
+    else if (questionPage === false) {
+        toQuestionPage();
+        questionPage = true;
+        // console.log(questionPage);
+    }  
+    
     else {
         unansweredQuestions++;
-        questionCount++;
-        console.log("Previous question: #" + questionCount);
         console.log("Unanswered Questions: " + unansweredQuestions);
         toAnswerPage();
         questionPage = false;
@@ -141,7 +140,7 @@ function gameChangePage() {
 // Function to change to question page
 function toQuestionPage() {
     questionSelector();
-    timeLeft = 10;
+    timeLeft = 2;
     correct = "";
     // pageTime();
     // countdownTimer();
@@ -151,7 +150,8 @@ function toQuestionPage() {
 
 function toAnswerPage() {
     triviaIndex++;
-    timeLeft = 5;
+    
+    timeLeft = 2;
     // pageTime();
     // countdownTimer();
     $(".answerOptions, #question-text").empty();
@@ -167,14 +167,24 @@ function toAnswerPage() {
     } else {
         $(".answerOptions").append("You did not make a guess. " + currentAnswer + " was the correct answer.")
     }
-    
+    questionCount++;
+    console.log("Previous question: #" + questionCount);
     clearInterval(intervalID);
     intervalID = setInterval (countdownTimer, 1000);
 }
 
 function toEndPage () {
-    $(".answerOptions, #question-text").empty();
+    clearInterval(intervalID);
+    $(".answerOptions, #question-text, #timer-text").empty();
     $(".answerOptions").html("<h4>Your final results:</h4> <p>Correct Answers: " + correctAnswers + "</p><p>Incorrect Answers: " + incorrectAnswers + "</p><p>Unanswered Questions: " + unansweredQuestions)
+    var restartButton = $("<button>")
+    restartButton.addClass("restartButton")
+    restartButton.text("Click here to restart the quiz!")
+    $(".answerOptions").append(restartButton);
+    $(document).on("click", ".restartButton", function() {
+        gameReset();
+    });
+
 }
 
 
@@ -184,6 +194,10 @@ function toEndPage () {
 // Document Ready Function to run on page load.
 $(document).ready(function(){
 
+    // Non-working click function
+    // $(".answerButton").click(function() {
+
+    // Working click function
     $(document).on("click", ".answerButton", function() {
         // console.log($(this).attr("answer-value"));
         var answerGiven = ($(this).attr("answer-value"));
