@@ -14,16 +14,16 @@ var intervalID;
 
 // Trivia questions array.
 var triviaQuestions = [
-    { q: "What is the capital of Italy?", answers: [{a: "Rome", c: "correct"}, {a: "Madrid", c: "incorrect"}, {a: "London", c: "incorrect"}, {a: "Paris", c: "incorrect"}]},
+    { q: "What is the capital of Italy?", answers: [{a: "Madrid", c: "incorrect"}, {a: "Rome", c: "correct"}, {a: "London", c: "incorrect"}, {a: "Paris", c: "incorrect"}]},
     { q: "Which European country also has direct control of land on mainland South America?", answers: [{a: "Spain", c: "incorrect"}, {a: "Portugal", c: "incorrect"}, {a: "France", c: "correct"}, {a: "Netherlands", c: "incorrect"}]},
-    { q: "Test Q - 3", answers: [{a: "A", c: "incorrect"}, {a: "B", c: "incorrect"}, {a: "C", c: "correct"}, {a: "D", c: "incorrect"}]},
-    { q: "Test Q - 4", answers: [{a: "A", c: "incorrect"}, {a: "B", c: "incorrect"}, {a: "C", c: "correct"}, {a: "D", c: "incorrect"}]},
-    { q: "Test Q - 5", answers: [{a: "A", c: "incorrect"}, {a: "B", c: "incorrect"}, {a: "C", c: "correct"}, {a: "D", c: "incorrect"}]},
-    { q: "Test Q - 6", answers: [{a: "A", c: "incorrect"}, {a: "B", c: "incorrect"}, {a: "C", c: "correct"}, {a: "D", c: "incorrect"}]},
-    { q: "Test Q - 7", answers: [{a: "A", c: "incorrect"}, {a: "B", c: "incorrect"}, {a: "C", c: "correct"}, {a: "D", c: "incorrect"}]},
-    { q: "Test Q - 8", answers: [{a: "A", c: "incorrect"}, {a: "B", c: "incorrect"}, {a: "C", c: "correct"}, {a: "D", c: "incorrect"}]},
-    { q: "Test Q - 9", answers: [{a: "A", c: "incorrect"}, {a: "B", c: "incorrect"}, {a: "C", c: "correct"}, {a: "D", c: "incorrect"}]},
-    { q: "Test Q - 10", answers: [{a: "A", c: "incorrect"}, {a: "B", c: "incorrect"}, {a: "C", c: "correct"}, {a: "D", c: "incorrect"}]}
+    { q: "Canada has the longest coastline in the world. Who has the second longest?", answers: [{a: "Russia", c: "incorrect"}, {a: "United States", c: "incorrect"}, {a: "Australia", c: "incorrect"}, {a: "Norway", c: "correct"}]},
+    { q: "What is the correct spelling of this former Soviet Republic located in Central Asia?", answers: [{a: "Kyrygyzstan", c: "incorrect"}, {a: "Kirgyzstan", c: "incorrect"}, {a: "Kyrgyzstan", c: "correct"}, {a: "Kirgikistan", c: "incorrect"}]},
+    { q: "Which country has the closest GDP to Virginia's 383 Billion USD?", answers: [{a: "United Arab Emirates", c: "correct"}, {a: "Turkey", c: "incorrect"}, {a: "Sweden", c: "incorrect"}, {a: "Colombia", c: "incorrect"}]},
+    { q: "What is the smallest border between two countries (including exclaves)?", answers: [{a: "Georgia/Armenia", c: "incorrect"}, {a: "Spain/Morocco", c: "correct"}, {a: "Malaysia/Singapore", c: "incorrect"}, {a: "England/France", c: "incorrect"}]},
+    { q: "What is the lowest point on land in the world?", answers: [{a: "Death Valley", c: "incorrect"}, {a: "Qattara Depression", c: "incorrect"}, {a: "Dead Sea", c: "correct"}, {a: "Lagunda del Carbon", c: "incorrect"}]},
+    { q: "The top ten highest peaks in the world are in the same mountain range. Which mountain range are they located in?", answers: [{a: "Himalayas", c: "correct"}, {a: "Rockies", c: "incorrect"}, {a: "Alps", c: "incorrect"}, {a: "Karakoram", c: "incorrect"}]},
+    { q: "Russia and China both have the most borders in the world. How many borders does each country have?", answers: [{a: "10", c: "incorrect"}, {a: "12", c: "incorrect"}, {a: "14", c: "correct"}, {a: "15", c: "incorrect"}]},
+    { q: "Which country out of the following is the oldest?", answers: [{a: "Germany", c: "incorrect"}, {a: "United States", c: "correct"}, {a: "Italy", c: "incorrect"}, {a: "Australia", c: "incorrect"}]}
 ];
 
 var imagesForAnswers = [];
@@ -140,7 +140,7 @@ function gameChangePage() {
 // Function to change to question page
 function toQuestionPage() {
     questionSelector();
-    timeLeft = 2;
+    timeLeft = 30;
     correct = "";
     // pageTime();
     // countdownTimer();
@@ -151,7 +151,7 @@ function toQuestionPage() {
 function toAnswerPage() {
     triviaIndex++;
     
-    timeLeft = 2;
+    timeLeft = 5;
     // pageTime();
     // countdownTimer();
     $(".answerOptions, #question-text").empty();
