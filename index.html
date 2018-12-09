@@ -5,32 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Trivia Game</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css"/>
 </head>
 <body>
 
-    <h1>Trivia Game!</h1>
-
     <div id="gameArea">
-        <div>
-            <h2 id="timer-text"></h2>
+        
+        <div id="questionArea">
+            <img id="question-image" src="assets/images/WelcomePage_v01_181208.png" alt="welcome to Easy Going Flight School image">
+            <h2 id="question-text"></h2>
+        </div> 
+        
+        <div id="timerArea">
+            <h2 id="timer-text"> </h2>
         </div>
 
-        <div>
-            <h2 id="question-text">Welcome Image goes here!</h2>
-        </div>
-        
-        <div>
+        <div id="answerArea">
             <div class="answerOptions">
                 <button id="startButton">Click to start the game!</button>
             </div>
 
-            <div id="completionPageStats-text">
-                <p class="scoreStats" id="score"></p>
-                <p class="scoreStats" id="correctAnswers"></p>
-                <p class="scoreStats" id="incorrectAnswers"></p>
-                <p class="scoreStats" id="unansweredQuestions"></p>
-            </div>
         </div>
     </div>
     

@@ -50,6 +50,8 @@ $("#startButton").on("click", function() {
 
 // Game Reset Function for initial game start and for resetting the game with the restart button.
 function gameReset() {
+    $("#question-image").hide();
+    $(".answerOptions, #question-text").empty();
     score = 0;
     correctAnswers = 0;
     incorrectAnswers = 0;
@@ -69,11 +71,15 @@ function questionSelector() {
     // Clearing fields from previous page.
     $(".answerOptions, #question-text").empty();
 
+    // Hiding the Welcome/Answer Image and showing the Question text.
+    $("#question-image").hide();
+    $("#question-text").show();
+
     // Selecting questions and writing them into question field
     questionIndex = triviaQuestions[triviaIndex].q;
 
     // console.log("Current Question: " + questionIndex);
-    $("#question-text").html(questionIndex);
+    $("#question-text").html("<p>" + questionIndex + "</p>");
 
     // Selecting corresponding answers and writing them into answer fields.
     answerIndex = [triviaQuestions[triviaIndex].answers[0].a, triviaQuestions[triviaIndex].answers[1].a, triviaQuestions[triviaIndex].answers[2].a, triviaQuestions[triviaIndex].answers[3].a];
@@ -94,21 +100,15 @@ function questionSelector() {
 
 }
 
-// Page timer function
-// function pageTime() {
-//     if (gameRunning = true) {
-//         if (questionPage = true) {
-//             setTimeout(toAnswerPage, 1000 * 5)
-//         } else {
-//             setTimeout(toQuestionPage, 1000 * 5)
-//         }
-//     }
-// }
-
 // Timer Function
 function countdownTimer() {
     timeLeft--;
-    $("#timer-text").text(timeLeft);
+
+    if (questionPage === true) {
+        $("#timer-text").html("Time Remaining: " + timeLeft);
+    } else {
+        $("#timer-text").html("Time Until Next Question: " + timeLeft);
+    }
     // console.log(timeLeft)
     if (timeLeft === 0) {
         gameChangePage();
@@ -141,25 +141,25 @@ function gameChangePage() {
 function toQuestionPage() {
     questionSelector();
     timeLeft = 30;
+    $("#timer-text").html("Time Remaining: " + timeLeft);
     correct = "";
-    // pageTime();
-    // countdownTimer();
     clearInterval(intervalID);
     intervalID = setInterval (countdownTimer, 1000);
 }
 
+// Function to change to answer page
 function toAnswerPage() {
     triviaIndex++;
-    
     timeLeft = 5;
-    // pageTime();
-    // countdownTimer();
+    $("#timer-text").html("Time Until Next Question: " + timeLeft);
     $(".answerOptions, #question-text").empty();
+    $("#question-text").hide();
     // var answerImage = $("<img>");
     // answerImage.attr("src", imagesForAnswers[questionCount - 1]);
     // answerImage.attr("width", '500px;)
-    // $("#question-text").append(answerImage);
-    $("#question-text").append("Image of Answer goes here!");
+    // $("#question-image").html(answerImage);
+    // $("#question-image").html("Image of Answer goes here!");
+    $("question-text").show();
     if (correct === true) {
         $(".answerOptions").append("Correct! " + currentAnswer + " was the correct answer.")
     } else if (correct === false) {
@@ -173,6 +173,7 @@ function toAnswerPage() {
     intervalID = setInterval (countdownTimer, 1000);
 }
 
+// Function to change to end page
 function toEndPage () {
     clearInterval(intervalID);
     $(".answerOptions, #question-text, #timer-text").empty();
@@ -194,10 +195,7 @@ function toEndPage () {
 // Document Ready Function to run on page load.
 $(document).ready(function(){
 
-    // Non-working click function
-    // $(".answerButton").click(function() {
-
-    // Working click function
+    // Click function for answer questions
     $(document).on("click", ".answerButton", function() {
         // console.log($(this).attr("answer-value"));
         var answerGiven = ($(this).attr("answer-value"));
