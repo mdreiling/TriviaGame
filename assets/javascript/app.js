@@ -14,19 +14,89 @@ var intervalID;
 
 // Trivia questions array.
 var triviaQuestions = [
-    { q: "What is the capital of Italy?", answers: [{a: "Madrid", c: "incorrect"}, {a: "Rome", c: "correct"}, {a: "London", c: "incorrect"}, {a: "Paris", c: "incorrect"}]},
-    { q: "Which European country also has direct control of land on mainland South America?", answers: [{a: "Spain", c: "incorrect"}, {a: "Portugal", c: "incorrect"}, {a: "France", c: "correct"}, {a: "Netherlands", c: "incorrect"}]},
-    { q: "Canada has the longest coastline in the world. Who has the second longest?", answers: [{a: "Russia", c: "incorrect"}, {a: "United States", c: "incorrect"}, {a: "Australia", c: "incorrect"}, {a: "Norway", c: "correct"}]},
-    { q: "What is the correct spelling of this former Soviet Republic located in Central Asia?", answers: [{a: "Kyrygyzstan", c: "incorrect"}, {a: "Kirgyzstan", c: "incorrect"}, {a: "Kyrgyzstan", c: "correct"}, {a: "Kirgikistan", c: "incorrect"}]},
-    { q: "Which country has the closest GDP to Virginia's 383 Billion USD?", answers: [{a: "United Arab Emirates", c: "correct"}, {a: "Turkey", c: "incorrect"}, {a: "Sweden", c: "incorrect"}, {a: "Colombia", c: "incorrect"}]},
-    { q: "What is the smallest border between two countries (including exclaves)?", answers: [{a: "Georgia/Armenia", c: "incorrect"}, {a: "Spain/Morocco", c: "correct"}, {a: "Malaysia/Singapore", c: "incorrect"}, {a: "England/France", c: "incorrect"}]},
-    { q: "What is the lowest point on land in the world?", answers: [{a: "Death Valley", c: "incorrect"}, {a: "Qattara Depression", c: "incorrect"}, {a: "Dead Sea", c: "correct"}, {a: "Lagunda del Carbon", c: "incorrect"}]},
-    { q: "The top ten highest peaks in the world are in the same mountain range. Which mountain range are they located in?", answers: [{a: "Himalayas", c: "correct"}, {a: "Rockies", c: "incorrect"}, {a: "Alps", c: "incorrect"}, {a: "Karakoram", c: "incorrect"}]},
-    { q: "Russia and China both have the most borders in the world. How many borders does each country have?", answers: [{a: "10", c: "incorrect"}, {a: "12", c: "incorrect"}, {a: "14", c: "correct"}, {a: "15", c: "incorrect"}]},
-    { q: "Which country out of the following is the oldest?", answers: [{a: "Germany", c: "incorrect"}, {a: "United States", c: "correct"}, {a: "Italy", c: "incorrect"}, {a: "Australia", c: "incorrect"}]}
+    { q: "What is the capital of Italy?", 
+        answers: [
+            {a: "Madrid", c: "incorrect"}, 
+            {a: "Rome", c: "correct"}, 
+            {a: "London", c: "incorrect"}, 
+            {a: "Paris", c: "incorrect"}]},
+
+    { q: "What is the lowest point on land in the world?", 
+        answers: [
+            {a: "Death Valley", c: "incorrect"}, 
+            {a: "Qattara Depression", c: "incorrect"}, 
+            {a: "Dead Sea", c: "correct"}, 
+            {a: "Lagunda del Carbon", c: "incorrect"}]},
+
+    { q: "Nine of the top ten highest peaks in the world are in the same mountain range. Which mountain range are they located in?", 
+        answers: [
+            {a: "Himalayas", c: "correct"}, 
+            {a: "Rockies", c: "incorrect"}, 
+            {a: "Alps", c: "incorrect"}, 
+            {a: "Karakoram", c: "incorrect"}]},
+
+    { q: "Which European country also has direct control of land on mainland South America?", 
+        answers: [
+            {a: "Spain", c: "incorrect"}, 
+            {a: "Portugal", c: "incorrect"}, 
+            {a: "France", c: "correct"}, 
+            {a: "Netherlands", c: "incorrect"}]},
+
+    { q: "Which country has the closest GDP to Virginia's 383 Billion USD?", 
+        answers: [
+            {a: "United Arab Emirates", c: "correct"}, 
+            {a: "Turkey", c: "incorrect"}, 
+            {a: "Sweden", c: "incorrect"}, 
+            {a: "Colombia", c: "incorrect"}]},
+
+    { q: "Which country out of the following is the oldest?", 
+        answers: [
+            {a: "Germany", c: "incorrect"}, 
+            {a: "United States", c: "correct"}, 
+            {a: "Italy", c: "incorrect"}, 
+            {a: "Australia", c: "incorrect"}]},
+
+    { q: "Canada has the longest coastline in the world. Who has the second longest?", 
+        answers: [
+            {a: "Russia", c: "incorrect"}, 
+            {a: "United States", c: "incorrect"}, 
+            {a: "Australia", c: "incorrect"}, 
+            {a: "Norway", c: "correct"}]},
+        
+    { q: "Russia and China both have the most borders in the world. How many borders does each country have?", 
+        answers: [
+            {a: "10", c: "incorrect"}, 
+            {a: "12", c: "incorrect"}, 
+            {a: "14", c: "correct"}, 
+            {a: "15", c: "incorrect"}]},
+
+    { q: "What is the smallest border between two countries?", 
+        answers: [
+            {a: "Egypt-Palestine", c: "incorrect"}, 
+            {a: "Botswana-Zambia", c: "correct"}, 
+            {a: "Croatia-Montenegro", c: "incorrect"}, 
+            {a: "Armenia-Iran", c: "incorrect"}]},
+
+    { q: "What is the correct spelling of this former Soviet Republic located in Central Asia?", 
+        answers: [
+            {a: "Kyrygyzstan", c: "incorrect"}, 
+            {a: "Kirgyzstan", c: "incorrect"}, 
+            {a: "Kyrgyzstan", c: "correct"}, 
+            {a: "Kirgikistan", c: "incorrect"}]}
 ];
 
-var imagesForAnswers = [];
+var imagesForAnswers = [
+    "../images/Question01.png", 
+    "../images/Question02.png", 
+    "../Question03.png", 
+    "../assets/images/Question04.png", 
+    "assets/images/Question05.png", 
+    "assets/images/Question06.png", 
+    "assets/images/Question07.png", 
+    "assets/images/Question08.png", 
+    "assets/images/Question09.png", 
+    "assets/images/Question10.png"
+];
 
 // Variables for advancing question and answer selector.
 var triviaIndex = 0;
@@ -50,7 +120,7 @@ $("#startButton").on("click", function() {
 
 // Game Reset Function for initial game start and for resetting the game with the restart button.
 function gameReset() {
-    $("#question-image").hide();
+    $("#question-image, #answer-image").hide();
     $(".answerOptions, #question-text").empty();
     score = 0;
     correctAnswers = 0;
@@ -72,7 +142,7 @@ function questionSelector() {
     $(".answerOptions, #question-text").empty();
 
     // Hiding the Welcome/Answer Image and showing the Question text.
-    $("#question-image").hide();
+    $("#question-image, #answer-image").hide();
     $("#question-text").show();
 
     // Selecting questions and writing them into question field
@@ -154,12 +224,8 @@ function toAnswerPage() {
     $("#timer-text").html("Time Until Next Question: " + timeLeft);
     $(".answerOptions, #question-text").empty();
     $("#question-text").hide();
-    // var answerImage = $("<img>");
-    // answerImage.attr("src", imagesForAnswers[questionCount - 1]);
-    // answerImage.attr("width", '500px;)
-    // $("#question-image").html(answerImage);
-    // $("#question-image").html("Image of Answer goes here!");
-    $("question-text").show();
+    $("#answer-image").html("<img src=" + imagesForAnswers[questionCount - 1] + ">");
+    $("#answer-image").show();
     if (correct === true) {
         $(".answerOptions").append("Correct! " + currentAnswer + " was the correct answer.")
     } else if (correct === false) {
