@@ -224,7 +224,7 @@ function toAnswerPage() {
     $("#timer-text").html("Time Until Next Question: " + timeLeft);
     $(".answerOptions, #question-text").empty();
     $("#question-text").hide();
-    $("#answer-image").html("<img src=" + imagesForAnswers[questionCount] + " style=' height: 450px; width: 900px;'>");
+    $("#answer-image").attr("src", imagesForAnswers[questionCount]);
     $("#answer-image").show();
     if (correct === true) {
         $(".answerOptions").append("Correct! " + currentAnswer + " was the correct answer.")
