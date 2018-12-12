@@ -86,10 +86,10 @@ var triviaQuestions = [
 ];
 
 var imagesForAnswers = [
-    "../images/Question01.png", 
-    "../images/Question02.png", 
-    "../Question03.png", 
-    "../assets/images/Question04.png", 
+    "assets/images/Question01.png", 
+    "assets/images/Question02.png", 
+    "assets/images/Question03.png", 
+    "assets/images/Question04.png", 
     "assets/images/Question05.png", 
     "assets/images/Question06.png", 
     "assets/images/Question07.png", 
@@ -224,7 +224,7 @@ function toAnswerPage() {
     $("#timer-text").html("Time Until Next Question: " + timeLeft);
     $(".answerOptions, #question-text").empty();
     $("#question-text").hide();
-    $("#answer-image").html("<img src=" + imagesForAnswers[questionCount - 1] + ">");
+    $("#answer-image").html("<img src=" + imagesForAnswers[questionCount] + " style=' height: 450px; width: 900px;'>");
     $("#answer-image").show();
     if (correct === true) {
         $(".answerOptions").append("Correct! " + currentAnswer + " was the correct answer.")
