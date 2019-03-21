@@ -20,7 +20,6 @@ A multiple-choice quiz branded as a flight school entrance exam that is focused 
 * CSS - Formatting
 * JavaScript - Logic within the page
 * JQuery - Calling objects within document
-* MomentJS - Timers
 * Adobe Suite - Graphics
 
 ## Setup
