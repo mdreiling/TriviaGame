@@ -2,10 +2,10 @@
 Easy Going Flight School Trivia Game - Week 5 Homework
 
 ## Table of Contents 
-* [Introduction] (##introduction)
-* [Technologies] (##technologies-used)
-* [Setup] (##setup)
-* [Link to Project] (##link-to-project)
+* Introduction
+* Technologies
+* Setup
+* Link to Project
 
 ## Introduction
 
